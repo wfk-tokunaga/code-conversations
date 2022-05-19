@@ -2,10 +2,11 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
 const User = require('./User');
+const Post = require('./Post');
 
-class Post extends Model {}
+class Comment extends Model {}
 
-User.init({
+Comment.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -16,40 +17,31 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
-    // foreign key that references User
+    // foreign key that references Post the comment was made on
     post_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: Post,
-
+            key: 'id'
         }
     },
+    // foreign key that references User who made the comment
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-            isEmail: true
-        },
-        unique: true
-    },
-}, {
-    hooks: {
-        // Hash password with bcrypt
-        async beforeCreate(newUserData) {
-            newUserData.password = await bcrypt.hash(newUserData.password, 10);
-            return newUserData;
-        },
-        async beforeUpdate(updateUserData) {
-            updateUserData.password = await bcrypt.hash(updateUserData.password, 10);
-            return updateUserData;
+        references: {
+            model: User,
+            key: 'id'
         }
-    },
+    }
+}, {
+    hooks: {},
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'user'
+    modelName: 'comment'
 })
 
-module.exports = User;
+module.exports = Comment;

@@ -1,29 +1,39 @@
 const Comment = require('../models/Comment');
 
 const commentData = [{
-        username: 'eika',
-        email: 'eika@gmail.com',
-        password: 'eikaPW'
+        text: 'Great point!',
+        post_id: '1',
+        user_id: '1'
     },
     {
-        username: 'shae',
-        email: 'shae@gmail.com',
-        password: 'shaePW'
+        text: 'I disagree',
+        post_id: '2',
+        user_id: '3'
     },
     {
-        username: 'eea',
-        email: 'eea@gmail.com',
-        password: 'eeaPW'
+        text: 'I love chemistry so much.',
+        post_id: '4',
+        user_id: '2'
     },
     {
-        username: 'lufa',
-        email: 'lufa@gmail.com',
-        password: 'lufaPW'
+        text: 'L + ratio',
+        post_id: '4',
+        user_id: '1'
     },
     {
-        username: 'mira',
-        email: 'mira@gmail.com',
-        password: 'miraPW'
+        text: 'Where is my icescream?',
+        post_id: '1',
+        user_id: '3'
+    },
+    {
+        text: 'I miss shae :(!',
+        post_id: '1',
+        user_id: '1'
+    },
+    {
+        text: 'Talk more about how shae is still at home!',
+        post_id: '2',
+        user_id: '3'
     },
 ];
 
