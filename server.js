@@ -1,5 +1,6 @@
 const express = require('express');
 const sequelize = require('./config/connection');
+const path = require('path');
 
 // need to create our connection to the mysql server
 const app = express();
