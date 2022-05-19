@@ -1,6 +1,7 @@
 const express = require('express');
 const sequelize = require('./config/connection');
 const path = require('path');
+const routes = require('./controllers');
 
 // need to create our connection to the mysql server
 const app = express();
@@ -10,6 +11,8 @@ const PORT = process.env.PORT || 3007;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(routes);
 
 // Connect the express server 
 sequelize.sync({ force: false }).then(() => {
