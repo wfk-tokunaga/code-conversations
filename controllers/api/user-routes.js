@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // Get all users
 // Prob wanna include their posts
@@ -22,9 +23,9 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         },
         // IF SOMETHING COMES UP LATER, THIS MIGHT BE THE ISSUE
-        attributes: {
-            exclude: ['password']
-        },
+        // attributes: {
+        //     exclude: ['password']
+        // },
         include: [{
                 model: Post,
                 attributes: ['id', 'title', 'text', 'created_at']
@@ -56,7 +57,13 @@ router.post('/', (req, res) => {
         email: req.body.email,
         password: req.body.password,
     }).then(dbUserData => {
-        res.status(200).json({ message: 'User created!' });
+        req.session.save(() => {
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+
+            res.json(dbUserData);
+        });
     }).catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -105,6 +112,55 @@ router.delete('/:id', (req, res) => {
         res.status(500).json(err);
     })
 });
+
+// Login
+router.post('/login', (req, res) => {
+    // expects {email: 'lernantino@gmail.com', password: 'password1234'}
+    // First, find the specific user trying to log
+    console.log('=====LOGGING IN=====');
+    User.findOne({
+        where: {
+            email: req.body.email
+        }
+    }).then(dbUserData => {
+        // Make sure the user exists
+        if (!dbUserData) {
+            res.status(404).json({ message: "No user found with that email." });
+            return;
+        }
+        // Check password
+        const validPw = dbUserData.checkPassword(req.body.password);
+        if (!validPw) {
+            res.status(400).json({ message: "Invalid password." });
+            return;
+        }
+        // Create a new session
+        req.session.save(() => {
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+            res.json({ user: dbUserData, message: "You are now logged in." });
+        })
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+})
+
+// Logout
+router.post('/logout', (req, res) => {
+    // expects {email: 'lernantino@gmail.com', password: 'password1234'}
+    // First, find the specific user trying to log
+    console.log('=====LOGGING OUT=====');
+    if (req.session.loggedIn) {
+        console.log('\n=====\nuser was logged in, but is now being logged out\n=====\n');
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
+    }
+})
 
 // router.('/', (req, res) => {
 
