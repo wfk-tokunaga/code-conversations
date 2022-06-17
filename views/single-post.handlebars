@@ -1,0 +1,19 @@
+{{!-- Use post info partial, which just shows the post and the title --}}
+{{> post-info post}}
+
+{{!-- Show comment input box --}}
+{{#if loggedIn}}
+<form id="comment-input-form">
+    <h3>Comment</h3>
+    <textarea name="new-comment" id="new-comment"></textarea>
+    <button type="submit" id="comment-submit-btn" class="submit-btn">Submit</button>
+</form>
+{{/if}}
+
+{{> comments post.comments }}
+
+{{#if loggedIn}}
+<script src="/javascript/comment.js"></script>
+{{/if}}
+
+<script src="/javascript/comment.js"></script>

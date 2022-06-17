@@ -1,0 +1,15 @@
+<div class="edit-post">
+    <h2>Edit Post</h2>
+    <form id="edit-post-form">
+        {{!-- Populate title and text with current values --}}
+        <h3>Title</h3>
+        <textarea name="new-title" id="new-title">{{post.title}}</textarea>
+        <h3>Text</h3>
+        <textarea name="new-text" id="new-text">{{post.text}}</textarea>
+        <button type="submit">Update Post</button>
+        <button class="delete-post-btn">Delete</button>
+    </form>
+</div>
+
+<script src="/javascript/edit-post.js"></script>
+<script src="/javascript/delete-post.js"></script>

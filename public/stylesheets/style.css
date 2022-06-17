@@ -1,0 +1,160 @@
+body {
+    background-color: coral;
+    font-family: arial, sans-serif;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: coral;
+}
+
+header a {
+    font-size: 40px;
+    text-decoration: none;
+    font-weight: bolder;
+    background-color: dimgray;
+    /* color: white; */
+    padding: 0 10px;
+}
+
+nav {
+    background-color: dimgray;
+    padding: 5px;
+}
+
+nav a {
+    font-size: 20px;
+    font-weight: medium;
+    margin: 10px;
+    text-decoration: none;
+    /* color: white; */
+}
+
+nav button {
+    font-size: 20px;
+    font-weight: medium;
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    /*input has OS specific font-family*/
+    color: white;
+    cursor: pointer;
+}
+
+article {
+    border: 2px solid black;
+}
+
+.wrapper {
+    width: 70%;
+    align-items: center;
+    margin: auto;
+}
+
+.title {
+    display: inline-block;
+}
+
+.post-list {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.post {
+    margin-top: 15px;
+    /* width: 80%; */
+    background-color: whitesmoke;
+}
+
+.post p {
+    margin-left: 10px;
+}
+
+.post-info {
+    float: right;
+    color: white;
+}
+
+.title-section {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: dimgray;
+}
+
+.title-section a {
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.text-section {
+    height: 100%;
+    font-size: 20px;
+}
+
+.comment {
+    margin-top: 10px;
+    background-color: whitesmoke;
+    border: 1px solid black;
+}
+
+.comment .meta {
+    margin: 5px 5px;
+}
+
+.comment .text {
+    margin: 10px 15px;
+}
+
+#your-post-list {
+    list-style: none;
+    padding-left: 0%;
+}
+
+#your-post-list li {
+    padding-left: 10px;
+    background-color: dimgray;
+}
+
+#your-post-list li span {
+    float: right;
+    vertical-align: middle;
+}
+
+.edit-post {
+    color: white;
+    /* display: flex; */
+    padding: 10px 10px;
+    /* padding-top: 5px; */
+    background-color: dimgray;
+}
+
+.edit-post h2 {
+    margin-top: 0;
+}
+
+.edit-post h3 {
+    margin-bottom: 5px;
+}
+
+.edit-post textarea {
+    width: 100%;
+    font-family: arial, sans-serif;
+    font-size: 20px;
+}
+
+#edit-post-form button {
+    display: block;
+    width: 25%;
+    margin: 10px 0px;
+}
+
+
+/* .text-section {
+
+} */

@@ -52,6 +52,8 @@ router.get('/:id', (req, res) => {
 
 // Create a new user
 router.post('/', (req, res) => {
+    console.log('creating new user');
+    console.log(req.body);
     User.create({
         username: req.body.username,
         email: req.body.email,

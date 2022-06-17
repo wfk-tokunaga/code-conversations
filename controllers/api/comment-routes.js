@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
-// const withAuth = require('../../utils/auth');
+const withAuth = require('../../utils/auth');
 
 // Get all comments
 router.get('/', (req, res) => {
@@ -33,24 +33,23 @@ router.get('/:id', (req, res) => {
 });
 
 // Create new comment
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     // check the session
-    // if (req.session) {
-    Comment.create({
-            text: req.body.text,
-            post_id: req.body.post_id,
-            // WILL LATER CHANGE THIS FOR SESSIONS
-            user_id: req.body.user_id
+    if (req.session) {
+        Comment.create({
+                text: req.body.text,
+                post_id: req.body.post_id,
                 // use the id from the session
-                // user_id: req.session.user_id
-        })
-        .then(dbCommentData => res.json(dbCommentData))
-        .catch(err => {
-            console.log(err);
-            res.status(400).json(err);
-        });
-    // }
+                user_id: req.session.user_id
+            })
+            .then(dbCommentData => res.json(dbCommentData))
+            .catch(err => {
+                console.log(err);
+                res.status(400).json(err);
+            });
+    }
 });
+
 
 // Update title of post with specific id
 router.put('/:id', (req, res) => {

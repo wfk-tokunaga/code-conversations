@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 const sequelize = require('../../config/connection');
-// const withAuth = require('../../utils/auth');
+const withAuth = require('../../utils/auth');
 
 // Get all posts
 
@@ -77,11 +77,11 @@ router.get('/:id', (req, res) => {
 });
 
 // Create a new post
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     console.log(`====================`);
     Post.create({
             title: req.body.title,
-            text: req.body.post_url,
+            text: req.body.text,
             user_id: req.session.user_id,
         })
         .then(dbPostData => res.json(dbPostData))
@@ -91,10 +91,11 @@ router.post('/', (req, res) => {
         });
 });
 
-// Update title of post with specific id
+// Update title & text of post with specific id
 router.put('/:id', (req, res) => {
     Post.update({
-        title: req.body.title
+        title: req.body.title,
+        text: req.body.text
     }, {
         where: {
             id: req.params.id

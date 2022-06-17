@@ -1,0 +1,12 @@
+<article class="post">
+      {{!-- <div class="title" style="display: flex; justify-content: space-between"> --}}
+      <div class="title-section">
+          <a href="/post/{{id}}">{{title}}</a>
+        {{!-- <h1 class="title">{{title}}</h1> --}}
+        {{!-- Later on, change the format of the date --}}
+        <span class="post-info">Posted by {{user.username}} on {{created_at}}</span>
+      </div>
+      <div class="text-section">
+            <p>{{text}}</p>
+      </div>
+</article>

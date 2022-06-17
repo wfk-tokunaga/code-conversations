@@ -4,6 +4,7 @@ const User = require('./User');
 
 // Create associations between models
 Post.belongsTo(User, {
+    onDelete: 'cascade',
     foreignKey: 'user_id'
 });
 
@@ -12,14 +13,17 @@ User.hasMany(Post, {
 })
 
 Comment.belongsTo(Post, {
+    // onDelete: 'cascade',
     foreignKey: 'post_id'
 })
 
 Post.hasMany(Comment, {
+    onDelete: 'cascade',
     foreignKey: 'post_id'
 })
 
 Comment.belongsTo(User, {
+    onDelete: 'cascade',
     foreignKey: 'user_id'
 })
 
